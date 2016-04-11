@@ -1,0 +1,48 @@
+canvas {
+    background-color: #000;
+    position: absolute;
+}
+#container {
+    text-align: -webkit-center;
+    bottom:0;
+    top:0;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
+html, body {
+    padding:0;
+    margin:0;
+    top:0;
+    bottom: 0;
+}
+#fps_text {
+    position: absolute;
+    color: white;
+    top: 20px;
+    left: 4px;
+    z-index: 1;
+}
+#fps {
+    position: absolute;
+    color: white;
+    top: 0px;
+    left: 30px;
+    z-index: 1;
+}
+
+#levelNum {
+    position: absolute;
+    color: white;
+    top: 4px;
+    left: 4px;
+    z-index: 1;
+}
+
+#levelNumText {
+    position: absolute;
+    color: white;
+    top: 0;
+    left: 46px;
+    z-index: 1;
+}

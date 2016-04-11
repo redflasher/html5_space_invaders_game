@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Invaders</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body onload="detectPlatform()">
+
+<div id="container">
+
+    <div id="fps_text">fps:
+        <div id="fps">0</div>
+    </div>
+
+    <div id="levelNum">Level:
+        <div id="levelNumText">0</div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+</div>
+<script type="text/javascript" src="js/buffer-loader.js"></script>
+<script type="text/javascript" src="js/snd.js"></script>
+
+<script src="js/main.js"></script>
+<script src="js/sprites.js"></script>
+</body>
+</html>
