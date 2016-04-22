@@ -3,14 +3,33 @@
     var bufferLoader;
     var _bufferList;
     var _buffers = [];
+    var that = this;
 
     function loadBeforePlay() {
         console.log("Sound: loadAndPlay");
         try {
             context = new AudioContext();
+            window.playStepSound = playStep;
+            window.playPlayerGunSound = playPlayerGun;
+            window.playEnemyGunSound = playEnemyGun;
+            window.playBulletBulletSound = playBulletBullet;
+            window.playEnemyDeadSound = playEnemyDead;
+            window.playPlayerGunDeadSound = playPlayerGunDead;
+            window.playWinSound = playWin;
+            window.playGameOverSound = playGameOver;
         }
         catch(e) {
-            alert("Web Audio API is not supported in this browser");
+            this.playSound = nullFunc;
+            window.playStepSound = nullFunc;
+            window.playPlayerGunSound = nullFunc;
+            window.playEnemyGunSound = nullFunc;
+            window.playBulletBulletSound = nullFunc;
+            window.playEnemyDeadSound = nullFunc;
+            window.playPlayerGunDeadSound = nullFunc;
+            window.playWinSound = nullFunc;
+            window.playGameOverSound = nullFunc;
+            console.log("Web Audio API is not supported in this browser");
+            return;
         }
 
         bufferLoader = new BufferLoader(
@@ -32,16 +51,19 @@
     }
 
     function finishedLoading(bufferList) {
-        _bufferList = bufferList;
+        that._bufferList = bufferList;
     }
 
     function playSound(num) {
         var self = this;
+
+        if(!that._bufferList) return;
+
         this.snd = context.createBufferSource();
-        this.snd.buffer = _bufferList[num];
+        this.snd.buffer = that._bufferList[num];
         this.snd.connect(context.destination);
 
-        this.snd.start(0);
+        if(this.snd)this.snd.start(0);
 
         this.snd.onended = function () {
             self.snd = null;
@@ -82,13 +104,15 @@
 
     //Init
     loadBeforePlay();
-    window.playStepSound = playStep;
-    window.playPlayerGunSound = playPlayerGun;
-    window.playEnemyGunSound = playEnemyGun;
-    window.playBulletBulletSound = playBulletBullet;
-    window.playEnemyDeadSound = playEnemyDead;
-    window.playPlayerGunDeadSound = playPlayerGunDead;
-    window.playWinSound = playWin;
-    window.playGameOverSound = playGameOver;
+    // window.playStepSound = playStep;
+    // window.playPlayerGunSound = playPlayerGun;
+    // window.playEnemyGunSound = playEnemyGun;
+    // window.playBulletBulletSound = playBulletBullet;
+    // window.playEnemyDeadSound = playEnemyDead;
+    // window.playPlayerGunDeadSound = playPlayerGunDead;
+    // window.playWinSound = playWin;
+    // window.playGameOverSound = playGameOver;
+
+    function nullFunc() {}
 
 })();

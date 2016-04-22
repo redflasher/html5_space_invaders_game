@@ -13,7 +13,7 @@ Unit.ENEMY_TYPE = 1;
 Unit.PLAYER_TYPE = 2;
 Unit.ENEMY_BULLET_TYPE = 3;
 Unit.DEFAULT_UNIT_SPEED = 5;
-Unit.PLAYER_BULLET_SPEED = 10;
+Unit.PLAYER_BULLET_SPEED = 6;
 //
 //make "delay" between enemy steps (for reduce fps)
 Enemy.STEP_TIME_DELAY = Enemy.DEFAULT_STEP_TIME_DELAY = 200;
@@ -84,7 +84,7 @@ Unit.prototype.update = function () {
 };
 
 Unit.prototype.destroy = function () {
-    this._cxt.clearRect(this._x,this._y,this._width, this._height);
+    this._cxt.clearRect(this._x - 2,this._y - 2,this._width + 4, this._height + 4);
 };
 
 ///////////////////PLAYER//GUN////////////////////
@@ -130,7 +130,9 @@ function PlayerGun() {
 
 
     this._bullet.update = function () {
-        this._cxt.clearRect(this._x, this._y + Unit.PLAYER_BULLET_SPEED, this._width, this._height);
+        // this._cxt.clearRect(this._x, this._y - Unit.PLAYER_BULLET_SPEED, this._width, this._height + Unit.PLAYER_BULLET_SPEED);
+        // this._cxt.clearRect(this._x, this._y - Unit.PLAYER_BULLET_SPEED, this._width, this._height + Unit.PLAYER_BULLET_SPEED);
+        this._cxt.clearRect(this._x - 2, this._y, this._width + 4, this._height + Unit.PLAYER_BULLET_SPEED*2);
         this._cxt.drawImage(this._img, this._x, this._y, this._width, this._height);
     };
 
@@ -343,7 +345,7 @@ EnemyBullet.prototype.hitTestWithPlayerBullet = function () {
 };
 
 EnemyBullet.prototype.update = function () {
-    this._cxt.clearRect(this._x, this._y - Enemy.BULLET_SPEED, this._width, this._height);
+    this._cxt.clearRect(this._x - 2, this._y - Enemy.BULLET_SPEED*2, this._width+4, this._height);
     this._cxt.drawImage(this._img, this._x, this._y, this._width, this._height);
 };
 
